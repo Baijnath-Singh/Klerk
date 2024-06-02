@@ -1,0 +1,87 @@
+body {
+    background: url('/static/images/real-estate-co-pilot.png') no-repeat center center fixed;
+    background-size: cover;
+    background-position-y: top;
+    background-position-x: center;
+    font-family: 'Roboto', sans-serif; /* Updated font-family */
+    color: #1a1a1a; /* Dark blue color for text */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 500px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.85); /* Slightly more opaque for better readability */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    overflow: auto;
+    max-height: 90vh;
+}
+
+h2 {
+    color: #003366; /* Darker blue for the title */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+textarea {
+    resize: none;
+    overflow: auto;
+}
+
+label {
+    color: #003366; /* Darker blue for labels */
+    font-weight: bold;
+}
+
+.btn-primary, .btn-secondary {
+    width: 150px; /* Set the desired width */
+}
+
+.btn-primary {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-primary:hover {
+    background-color: #004085;
+    border-color: #003366;
+}
+
+.form-control:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 0 0.2rem rgba(0, 86, 179, 0.25);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+#outputText {
+    background-color: #f8f9fa;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+    .container {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
