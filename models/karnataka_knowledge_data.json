@@ -1,5 +1,6 @@
 [
     {
+        "id": "6baaef6c-2e0d-45a3-bd7d-86888f3fc162",
         "category": "Registration of Documents",
         "question": "How ownership of immovable property is acquired by a person?",
         "answer": "A person may acquire immovable property in any of the following ways:\n(i) By inheritance of ancestral property.\n(ii) Through will.\n(iii) Acquisition by oneself such as purchase etc.\n(iv) Through gift, trust, settlement deeds.\n(v) Grant, sanad / Inam by the Government.\nThrough decree of Court. There are two ways of acquisition:\n1. By act of parties.\nExample: Purchase, gift etc.\n2. By operation of law.\nExample: Inheritance, decree of Court etc. (for details please see Transfer of Property Act, 1882 (Central Act))",
@@ -7,6 +8,7 @@
         "tags": ["registration", "immovable", "property", "documents"]
     },
     {
+        "id": "b1230c96-4fb4-4d7a-aebe-8c5f12c57e67",
         "category": "Registration of Documents",
         "question": "Is it necessary to register in Office of the Sub Registrar to get khata transferred in respect of property acquired by inheritance?",
         "answer": "Not necessary. After the death of owner of a property his heirs, such as wife, children i.e. male and female, married or unmarried may get the Khata transferred on production of death certificate of the owner with details of property held by him to the following officers.If property is an agricultural land - Tahasildar (See Sec.128 of Karnataka Land Revenue Act, 1964) Offices of Corporation, Municipality, Panchayat or City survey if such office exists.",
@@ -14,6 +16,7 @@
         "tags": ["registration", "khata", "death", "documents"]
     },
     {
+        "id": "d3a7d774-4495-4bb8-a618-20801e418c7e",
         "category": "Registration of Documents",
         "question": "Which are the documents requires to be compulsorily registered?",
         "answer": "1. Gift deed of immovable property.\n\n2. Other non-testamentary instruments, which purport or Operate to create, declare, assign, limit or extinguish whether in the present or in future, any right, title or interest, whether vested or contingent, of the value of one hundred rupees and upwards, to or in immovable property;\n\n3. Non testamentary instruments which acknowledge the receipt or payment of any consideration on account of the creation, declaration, assignment, limitation or extension of any such right, title or interest;\n\n4. Leases of immovable property from year or for any term exceeding one year, or reserving a yearly rent;\n\n5. Non testamentary instruments transferring or assigning any decree or order of a court or any award when such decree or order or award purports or operates to create, declare, assign, limit or extinguish whether in the present or in future, any right, title or interest, whether vested or contingent, of the value of one hundred rupees and upwards, to or in immovable property;\n\n6. The documents containing contracts to transfer for consideration, any immovable property for the purpose of section 53A of the Transfer of Property Act, 1882 shall be registered if they have been executed on or after the commencement of the Registration and Other Related Laws (Amendment) Act, 2000 and if such documents are not registered on or after such commencement, then, they shall have no effect for the purposes of the said section 53A",
@@ -21,6 +24,7 @@
         "tags": ["registration", "compulsorily registered", "documents"]
     },
     {
+        "id": "a170db89-d9c7-4b9d-a5aa-b23e43e5a3b1",
         "category": "Registration of Documents",
         "question": "How to effect partition of .property?",
         "answer": "a. If all the parties have share (common right) in the property partition can be effected. If partition is effected through an instrument such instrument must be compulsorily registered.\n\nb. Oral partition affected through memorandum submitted to the concerned authorities need not be registered.\n\nc. Stamp duty has to be paid in respect any kind of partition whether it is to be compulsorily registered or not.\n\nd. Parties to the partition may agree to effect partition of unequal shares.",
@@ -28,6 +32,7 @@
         "tags": ["registration", "partition", "property", "documents"]
     },
     {
+        "id": "69ad6c2c-4ed9-4c42-86cf-2e417a7a3c21",
         "category": "Registration of Documents",
         "question": "When there are two or more heirs, can one or two be made full owners by others taking money in lieu of their share?",
         "answer": "a) Yes. Any of the co-owners can individually or collectively release his / their right in favour of one or more collectively as the case may be and make him / them full owner. This kind of release can be with or without payment of money. This document is called Release.\n\nb) Release can be made not only in case of inherited property but also in case of joint purchase/acquisition.",
@@ -35,6 +40,7 @@
         "tags": ["registration", "heirs", "documents"]
     },
     {
+        "id": "5d60f98b-0e92-4b0b-ba4e-35c3fbab6148",
         "category": "Registration of Documents",
         "question": "What is a will?",
         "answer": "A testamentary document by which a person bequeaths his property to be effective on his death is a will. The property will devolve on the person in whose favour it is bequeathed after the death of the testator.",
@@ -42,6 +48,7 @@
         "tags": ["registration", "will", "documents"]
     },
     {
+        "id": "786f5c08-8c9a-4578-94f1-7e09163d7b57",
         "category": "Registration of Documents",
         "question": "Who can execute a will?",
         "answer": "a) Any person above the age of 18 years and mentally sound may execute a will, but a will caused by fraud, coercion, or importunity will not be valid. Therefore, a will must be executed voluntarily.\n\nb) Parents or guardians cannot execute a will on behalf of minors or lunatics.\n\nc) Attestation by a minimum of two witnesses is necessary.\n\nd) The scribe (deed writer / advocate) cannot be called a witness. Two independent attesting witnesses other than the scribe are necessary.\n\ne) A beneficiary under a will should not sign as an attesting witness. In order to avoid disputes in the implementation of a will, the description of property and the beneficiaries should be clearly written without giving room for any doubt.",
@@ -49,6 +56,7 @@
         "tags": ["registration", "execute will", "documents"]
     },
     {
+        "id": "8a5fd1cc-2b89-41b8-8179-e918b681b605",
         "category": "Registration of Documents",
         "question": "Is it compulsory to register a will?",
         "answer": "It is not compulsory to register. Executants may register at his option. It is better to register the will. If original is lost a certified copy can be obtained from Sub-Registrar Office.",
@@ -56,6 +64,7 @@
         "tags": ["registration", "register will", "documents"]
     },
     {
+        "id": "d0b58c54-8ef7-4b7f-b648-12c2d6d9cf0d",
         "category": "Registration of Documents",
         "question": "Where can the will be registered?",
         "answer": "It can be registered in any office of the Sub Registrar in India",
@@ -63,6 +72,7 @@
         "tags": ["registration", "register will", "documents"]
     },
     {
+        "id": "4d2c5479-f678-42d6-98bb-819e40c8b56e",
         "category": "Registration of Documents",
         "question": "Is there any time limit to register a will?",
         "answer": "There is no such time limit",
@@ -70,6 +80,7 @@
         "tags": ["registration", "register will", "documents"]
     },
     {
+        "id": "86be4677-f049-490a-913a-6d18e16cf4f0",
         "category": "Registration of Documents",
         "question": "Can a will be cancelled?",
         "answer": "The testator can cancel his will at anytime during his lifetime. Such cancellation deed requires a Stamp duty of Rs.100-00",
@@ -77,6 +88,7 @@
         "tags": ["registration", "register will", "cancel", "documents"]
     },
     {
+        "id": "ad44c524-cb85-411e-9c12-401448ed1a4d",
         "category": "Registration of Documents",
         "question": "Can a registered will be rectified or changed?",
         "answer": "If executant of a will wishes to rectify, add to will may do so during his lifetime. This is called codicil. This document does not require stamp duty.",
@@ -84,6 +96,7 @@
         "tags": ["registration", "register will", "rectify", "documents"]
     },
     {
+        "id": "f2b1f7a1-06e1-40ec-8e5f-fb5d97dd6d56",
         "category": "Registration of Documents",
         "question": "Can a will be registered even after death of testator?",
         "answer": "Yes, the claiming party under the will has to produce the will, records relating to the death of the testator, witnesses, and the scribe before the Sub Registrar. If the Sub Registrar is satisfied about the truth and genuineness of the execution of the will, he will register it.",
@@ -91,12 +104,14 @@
         "tags": ["registration", "register will", "death", "testator","documents"]
     },
     {
+        "id": "d52c3a57-9459-4c2a-b6c5-569f4d1cdb71",
         "category": "Registration of Documents",
         "question": "What is the Stamp duty and Registration fee to register a will?",
         "answer": "There is no stamp duty on a will deed. For the registration of a will during the lifetime of the testator, a registration fee of Rs.200-00 is prescribed. To register the will after the death of the testator, a registration fee of Rs.200-00 and an enquiry fee of Rs.250-00 are prescribed.",
         "tags": ["registration", "register will", "stamp duty", "documents"]
     },
     {
+        "id": "03fbc7e4-1f18-4be2-8b44-82df9a0648b3",
         "category": "Registration of Documents",
         "question": "Is the certified copy of a registered will available to any body?",
         "answer": "A certified copy of a registered will is available to the testator only during his lifetime. After his death anybody can obtain after producing proof of death of testator.",
@@ -104,6 +119,7 @@
         "tags": ["registration", "register will", "copy", "documents"]
     },
     {
+        "id": "4a6368e0-2c92-49b2-8516-4f76067e2c06",
         "category": "Registration of Documents",
         "question": "How to keep contents of a will confidential?",
         "answer": "A will can be deposited in a sealed cover in the office of the District Registrar. A fee of Rs.1000-00 is prescribed to deposit a will in a sealed cover. The depositor or authorized person (executor) can withdraw the sealed cover containing a will if they desire to do so. A registration fee of Rs.200-00 is prescribed.",
@@ -111,6 +127,7 @@
         "tags": ["registration", "register will", "confidential", "documents"]
     },
     {
+        "id": "fa04c9d5-ff58-4b89-bbff-172d25d58e58",
         "category": "Registration of Documents",
         "question": "What is the procedure to obtain the sealed cover containing a will after the death of the depositor?",
         "answer": "On making an application along with proof of the death of the depositor, the District Registrar will open the sealed cover in the presence of the applicant and it will be registered. A certified copy will be issued if desired. A fee of Rs.100-00 is prescribed to open a sealed cover.",
@@ -118,6 +135,7 @@
         "tags": ["registration", "register will", "death", "documents"]
     },
     {
+        "id": "2d8bfa1d-7c88-4a12-96b6-9ccf72a8a89e",
         "category": "Registration of Documents",
         "question": "What is the procedure for change of khata of the properties obtained through will?",
         "answer": "After the death of the testator person claiming through the will have to apply to the concerned authorities as explained in question no.2 along with the copy of the will and death proof.",
@@ -125,6 +143,7 @@
         "tags": ["registration", "register will", "khata", "death", "documents"]
     },
     {
+        "id": "d2b0c3b8-e516-4c55-85a4-1b57fc00369c",
         "category": "Registration of Documents",
         "question": "What are the duties and liabilities of buyers and sellers while purchasing a property?",
         "answer": "Before sale Liabilities of seller are following:\n1. To inform defects in the property\n2. To provide records of right\n3. To execute sale deed\n4. To pay off the liabilities on the property\n\nBefore sale Liabilities of purchaser are following:\n1. Payment of consideration\n\nRight of Seller\n- To get rent and profits\n\nRights of buyer\n- To encumbrance on consideration already paid\n\nAfter completion of sale Liabilities of seller are following:\n1. To hand over possession\n2. Information about right\n3. To hand over records of rights after receipt of consideration\n4. Rights of seller\n5. If consideration is due encumbrance on property of such dues\n\nAfter completion of sale Liabilities of purchaser are following:\n1. Liability on accidental or loss to the property\n2. Duty to pay taxes and liabilities after taking possession of property\n3. Rights of buyer\n4. Incremental value/profit on property\n\nThough there are rights and duties, the purchaser should carefully examine the following matters:\n\n1) Original documents.\n2) How did the seller acquire the property.\n3) Encumbrance Certificate of the property for a minimum period of 15 years from Sub Registry Office to know if there are any encumbrances on the property to be purchased.\n4) Verify from the concerned court if there are any litigations on the property to be purchased.\n5) Verify if there are any litigations, objections in revenue, municipal offices about inheritance or any other matter.\n6) If the seller is a power of attorney holder, it should be verified from the principal and if such power of attorney is genuine and whether it is still in force.\n7) It should be verified whether the transaction is opposed to public policy under Section 22A of the Registration Act, 1908. If so the document will not be registered.\n8) If the Property is a granted land to the member of scheduled caste and scheduled tribe, it should be verified if the transaction is in contravention of the terms and conditions of grant and whether permission of the Government is obtained for transfer.",
