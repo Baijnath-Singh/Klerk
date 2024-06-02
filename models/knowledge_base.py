@@ -16,3 +16,12 @@ class KnowledgeDocument(BaseModel):
     class Config:
         allow_population_by_field_name = True
 
+class KnowledgeDocumentList(BaseModel):
+    """
+    The KnowledgeDocumentList class represents a list of documents.
+    This class is used when deserializing a collection/array
+    of documents.
+    """
+    items: List[KnowledgeDocument]
+
+
