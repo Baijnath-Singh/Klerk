@@ -11,7 +11,6 @@ class KnowledgeDocument(BaseModel):
     answer: str
     source: str
     tags: List[str]
-    timestamp: datetime
 
     class Config:
         allow_population_by_field_name = True
