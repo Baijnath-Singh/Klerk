@@ -30,3 +30,20 @@ function displayOutput(text) {
 
 // Initialize with placeholder text
 displayOutput('Translated content and responses will appear here.');
+
+// Terms and conditions acceptance logic
+const acceptTermsCheckbox = document.getElementById('acceptTerms');
+const acceptTermsButton = document.getElementById('acceptTermsButton');
+const termsContainer = document.getElementById('terms-container');
+const mainContainer = document.getElementById('main-container');
+
+acceptTermsCheckbox.addEventListener('change', function() {
+    acceptTermsButton.disabled = !this.checked;
+});
+
+acceptTermsButton.addEventListener('click', function() {
+    if (acceptTermsCheckbox.checked) {
+        termsContainer.classList.add('d-none');
+        mainContainer.classList.remove('d-none');
+    }
+});

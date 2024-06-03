@@ -3,8 +3,8 @@ body {
     background-size: cover;
     background-position-y: top;
     background-position-x: center;
-    font-family: 'Roboto', sans-serif; /* Updated font-family */
-    color: #1a1a1a; /* Dark blue color for text */
+    font-family: 'Roboto', sans-serif;
+    color: #1a1a1a;
     margin: 0;
     padding: 0;
     display: flex;
@@ -17,7 +17,7 @@ body {
 .container {
     max-width: 500px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.85); /* Slightly more opaque for better readability */
+    background-color: rgba(255, 255, 255, 0.85);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -27,7 +27,7 @@ body {
 }
 
 h2 {
-    color: #003366; /* Darker blue for the title */
+    color: #003366;
     text-align: center;
     margin-bottom: 20px;
     font-weight: bold;
@@ -39,12 +39,12 @@ textarea {
 }
 
 label {
-    color: #003366; /* Darker blue for labels */
+    color: #003366;
     font-weight: bold;
 }
 
 .btn-primary, .btn-secondary {
-    width: 150px; /* Set the desired width */
+    width: 150px;
 }
 
 .btn-primary {

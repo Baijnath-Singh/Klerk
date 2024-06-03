@@ -3,17 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Land Registration Translator</title>
+    <title>Klerk</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5 p-4 border rounded shadow">
-        <h2 class="text-center text-primary mb-4">Land Registration Translator</h2>
+    <div class="container mt-5 p-4 border rounded shadow" id="terms-container">
+        <h2 class="text-center text-primary mb-4">Terms and Conditions</h2>
+        <div class="terms-content">
+            <p><strong>Document Storage:</strong></p>
+            <p>The document you upload will be stored locally on your device. The application does not store or retain any uploaded documents on its servers.</p>
+            <p><strong>Content Processing:</strong></p>
+            <p>The content of the uploaded document will be processed by the application to provide a translation. However, the application does not store or retain any processed information after the translation is delivered.</p>
+            <p><strong>Translation Accuracy:</strong></p>
+            <p>The translated response provided by the application may contain minor grammatical errors. We strive for high accuracy, but please be aware of potential imperfections in the translation.</p>
+            <p><strong>Knowledge Base:</strong></p>
+            <p>The application’s knowledge base is continuously updated to improve response accuracy and relevance. Despite these updates, there may be instances where certain information is not entirely up to date.</p>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="acceptTerms">
+            <label class="form-check-label" for="acceptTerms">I have read, understood, and agree to these terms and conditions.</label>
+        </div>
+        <button type="button" class="btn btn-primary mt-3" id="acceptTermsButton" disabled>Accept and Continue</button>
+    </div>
+
+    <div class="container mt-5 p-4 border rounded shadow d-none" id="main-container">
+        <h2 class="text-center text-primary mb-4">Klerk</h2>
         <form id="translatorForm">
             <div class="form-group">
-                <label for="fileInput" class="font-weight-bold">Upload Land Registration Document</label>
+                <label for="fileInput" class="font-weight-bold">Upload Document</label>
                 <input type="file" class="form-control" id="fileInput" name="file">
             </div>
             <div class="form-group">
@@ -54,7 +73,6 @@
                     <option value="fr">Danish</option>
                     <option value="fr">Finnish</option>
                     <option value="fr">Norwegian</option>
-                    <!-- Add more languages as needed -->
                 </select>
             </div>
             <div class="form-group">
