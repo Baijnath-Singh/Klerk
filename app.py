@@ -1,10 +1,11 @@
 import os
 from flask import Flask, render_template, request, jsonify
-from openai import AzureOpenAI
 from dotenv import load_dotenv
 import base64
 import requests
-from mimetypes import guess_type
+from pymongo import MongoClient
+from datetime import datetime, timezone
+import openai
 
 load_dotenv()
 
@@ -14,6 +15,66 @@ UPLOAD_FOLDER = 'uploads'
 # Set the OpenAI API key and endpoint from environment variables
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Initialize MongoDB client
+client = MongoClient(os.getenv('DB_CONNECTION_STRING'))
+db = client['karnataka_klerk']
+collection = db['document_registration']
+
+# Initialize OpenAI API
+openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_api_endpoint = os.getenv("OPENAI_API_ENDPOINT")
+openai_deployment = os.getenv("OPENAI_LLM_4_O")
+openai_embedding = os.getenv("OPENAI_LLM_EMBEDDING")
+
+def generate_embeddings(text, engine):
+    """
+    Generate embeddings for a given text using the specified Azure OpenAI embedding model.
+
+    Args:
+        text (str): The input text to generate embeddings for.
+        engine (str): The Azure OpenAI embedding model to use.
+
+    Returns:
+        list: A list of embedding vectors.
+    """
+    response = requests.post(
+        f'{openai_api_endpoint}/openai/deployments/{engine}/embeddings?api-version=2023-06-01-preview',
+        headers={
+            'api-key': openai_api_key,
+            'Content-Type': 'application/json'
+        },
+        json={
+            "input": text,
+        }
+    )
+
+    response_json = response.json()
+    embeddings = response_json['data'][0]['embedding']
+    return embeddings
+
+def vector_search(collection_name, query_embedding, num_results=1):
+    """
+    Perform a vector search on the specified collection by vectorizing
+    the query and searching the vector index for the most similar documents.
+
+    returns a list of the top num_results most similar documents
+    """
+    collection = db[collection_name]    
+    pipeline = [
+        {
+            '$search': {
+                "cosmosSearch": {
+                    "vector": query_embedding,
+                    "path": "contentVector",
+                    "k": num_results
+                },
+                "returnStoredSource": True }},
+        {'$project': { 'similarityScore': { '$meta': 'searchScore' }, 'document' : '$$ROOT' } }
+    ]
+    results = collection.aggregate(pipeline)
+    return results
+
 
 @app.route('/')
 def index():
@@ -41,9 +102,25 @@ def translate():
     print(f'Target language: {target_language}')
     print(f'User query: {query}')
     
-    sEndpoint = os.getenv("OPENAI_API_ENDPOINT")
-    sKey = os.getenv("OPENAI_API_KEY")
-    sDeployment='real-estate-translator-openai-llm-4o'
+    # Step 1: Create embeddings on input prompt
+    query_embedding = generate_embeddings(query, engine=openai_embedding)  # Example embedding model 
+    print("query_embedding: ", query_embedding)
+
+    # Step 2: Perform vector search in Cosmos DB
+    response = vector_search("document_registration", query_embedding, 1)  # Assuming your collection supports vector search
+    print("vector_search response", response)
+
+    # Step 3: Augment the input prompt with retrieved text
+    for doc in response:
+        print("Question", doc['document']['question'])
+        print("Answer", doc['document']['answer'])
+        query += f"\n\n{doc['document']['question']}\n{doc['document']['answer']}"
+    
+    print("augmented query:", query)
+
+    sEndpoint = openai_api_endpoint
+    sKey = openai_api_key
+    sDeployment = openai_deployment
 
     # Initialize messages with the system prompt
     dData = {
