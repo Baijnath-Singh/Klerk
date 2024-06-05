@@ -38,41 +38,7 @@
             <div class="form-group">
                 <label for="languageSelect" class="font-weight-bold">Select Target Language</label>
                 <select class="form-control" id="languageSelect" name="target_language">
-                    <option value="en">English</option>
-                    <option value="hi">Hindi</option>
-                    <option value="fr">Kannada</option>
-                    <option value="fr">Tamil</option>
-                    <option value="fr">Telugu</option>
-                    <option value="fr">Marathi</option>
-                    <option value="fr">Gujarati</option>
-                    <option value="fr">Malayalam</option>
-                    <option value="fr">Odia</option>
-                    <option value="fr">Urdu</option>
-                    <option value="fr">Assamese</option>
-                    <option value="hi">Bengali</option>
-                    <option value="hi">Punjabi</option>
-                    <option value="hi">Chinese</option>
-                    <option value="hi">Spanish</option>
-                    <option value="hi">French</option>
-                    <option value="hi">Arabic</option>
-                    <option value="hi">Portuguese</option>
-                    <option value="hi">Russian</option>
-                    <option value="hi">German</option>
-                    <option value="hi">Japanese</option>
-                    <option value="hi">Korean</option>
-                    <option value="hi">Vietnamese</option>
-                    <option value="hi">Italian</option>
-                    <option value="hi">Turkish</option>
-                    <option value="hi">Malay/Indonesian</option>
-                    <option value="hi">Persian</option>
-                    <option value="hi">Thai</option>
-                    <option value="fr">Dutch</option>
-                    <option value="fr">Greek</option>
-                    <option value="fr">Hebrew</option>
-                    <option value="fr">Swedish</option>
-                    <option value="fr">Danish</option>
-                    <option value="fr">Finnish</option>
-                    <option value="fr">Norwegian</option>
+                    <!-- Language options here -->
                 </select>
             </div>
             <div class="form-group">
@@ -88,7 +54,47 @@
             <label for="outputText" class="font-weight-bold">Output</label>
             <textarea class="form-control" id="outputText" rows="10" readonly></textarea>
         </div>
+        <button type="button" class="btn btn-info mt-3" id="findClerkButton" style="float: right;">Find Clerk</button>
     </div>
+
+    <div class="container mt-5 p-4 border rounded shadow d-none" id="clerkInfoContainer">
+        <h2 class="text-center text-primary mb-4">Find Clerk</h2>
+        <form id="clerkForm">
+            <div class="form-group">
+                <label for="countrySelect" class="font-weight-bold">Select Country</label>
+                <select class="form-control" id="countrySelect" name="country"></select>
+            </div>
+            <div class="form-group">
+                <label for="stateSelect" class="font-weight-bold">Select State</label>
+                <select class="form-control" id="stateSelect" name="state" disabled></select>
+            </div>
+            <div class="form-group">
+                <label for="citySelect" class="font-weight-bold">Select City</label>
+                <select class="form-control" id="citySelect" name="city" disabled></select>
+            </div>
+            <div class="form-group">
+                <label for="departmentSelect" class="font-weight-bold">Select Department</label>
+                <select class="form-control" id="departmentSelect" name="department" disabled></select>
+            </div>
+            <div class="form-group">
+                <label for="officeSelect" class="font-weight-bold">Select Office</label>
+                <select class="form-control" id="officeSelect" name="office" disabled></select>
+            </div>
+            <div class="form-group">
+                <label for="clerkSelect" class="font-weight-bold">Select Clerk</label>
+                <select class="form-control" id="clerkSelect" name="clerk" disabled></select>
+            </div>
+            <div class="button-group">
+                <button type="button" class="btn btn-primary" id="findClerkSubmit">Submit</button>
+                <button type="button" class="btn btn-secondary" id="clerkFormBackButton">Back</button>
+            </div>
+        </form>
+        <div class="form-group mt-4">
+            <label for="clerkOutputText" class="font-weight-bold">Clerk Information</label>
+            <textarea class="form-control" id="clerkOutputText" rows="10" readonly></textarea>
+        </div>
+    </div>
+
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
