@@ -104,17 +104,19 @@ def translate():
     
     # Step 1: Create embeddings on input prompt
     query_embedding = generate_embeddings(query, engine=openai_embedding)  # Example embedding model 
-    print("query_embedding: ", query_embedding)
+    #print("query_embedding: ", query_embedding)
 
     # Step 2: Perform vector search in Cosmos DB
     response = vector_search("KarnatakaLegalBook", query_embedding, 1)  # Assuming your collection supports vector search
     print("vector_search response", response)
 
     # Step 3: Augment the input prompt with retrieved text
-    for doc in response:
-        print("Question", doc['document']['question'])
-        print("Answer", doc['document']['answer'])
-        query += f"\n\n{doc['document']['question']}\n{doc['document']['answer']}"
+    results = list(response)
+    if results:
+        for doc in response:
+            print("Question", doc['document']['question'])
+            print("Answer", doc['document']['answer'])
+            query += f"\n\n{doc['document']['question']}\n{doc['document']['answer']}"
     
     print("augmented query:", query)
 
@@ -128,7 +130,8 @@ def translate():
             {
                 "role": "system",
                 "content": """
-                You are an expert multilingual assistant.
+                Your name is Klerk
+                You are an expert Multilingual Clerk with vast knowledge of government rules, policies, regulations, scheme, offers etc.
                 You can read and comprehend content in multiple languages and respond accurately to queries in a language {target_language}. 
                 You can interpret input files in various formats and provide precise answers in {target_language} based on the content of these files.
                 You can also answer to any query if asked in {target_language}
