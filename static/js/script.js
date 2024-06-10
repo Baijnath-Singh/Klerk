@@ -80,50 +80,366 @@ const clerkSelect = document.getElementById('clerkSelect');
 
 const data = {
     'India': {
-        'Maharashtra': {
-            'Mumbai': {
+        'Karnataka': {
+            'Bengaluru': {
                 'Departments': {
-                    'Finance': {
+                    'Agriculture': {
                         'Offices': {
-                            'Office 1': {
-                                address: '123 Finance St, Mumbai',
-                                contact: '9876543210',
+                            'Agriculture St': {
+                                address: 'No. 1, Agriculture St, Bengaluru',
+                                contact: '0801234567',
                                 clerks: [
-                                    { name: 'John Doe', mobile: '1234567890', experience: '5 years', rating: '4.5/5' },
-                                    { name: 'Jane Doe', mobile: '0987654321', experience: '3 years', rating: '4.0/5' }
+                                    { name: 'Ravi Kumar', mobile: '9001234567', experience: '5 years', rating: '4.5/5' }
                                 ]
                             },
-                            'Office 2': {
-                                address: '456 Business Rd, Mumbai',
-                                contact: '8765432109',
+                            'Agriculture Rd': {
+                                address: 'No. 2, Agriculture Rd, Bengaluru',
+                                contact: '0802345678',
                                 clerks: [
-                                    { name: 'Jim Beam', mobile: '2345678901', experience: '4 years', rating: '4.2/5' },
-                                    { name: 'Jack Daniels', mobile: '3456789012', experience: '2 years', rating: '3.8/5' }
+                                    { name: 'Anita Sharma', mobile: '9002345678', experience: '3 years', rating: '4.0/5' }
                                 ]
                             }
                         }
-                    }
+                    },
+                    'Animal Husbandary and Fisheries': {
+                        'Offices': {
+                            'Fisheries St': {
+                                address: 'No. 1, Fisheries St, Bengaluru',
+                                contact: '0803456789',
+                                clerks: [
+                                    { name: 'Mohan Lal', mobile: '9003456789', experience: '4 years', rating: '4.2/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Backward Class Welfare': {
+                        'Offices': {
+                            'Welfare St': {
+                                address: 'No. 1, Welfare St, Bengaluru',
+                                contact: '0804567890',
+                                clerks: [
+                                    { name: 'Geeta Devi', mobile: '9004567890', experience: '2 years', rating: '3.8/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Commerce and Industries': {
+                        'Offices': {
+                            'Commerce St': {
+                                address: 'No. 1, Commerce St, Bengaluru',
+                                contact: '0805678901',
+                                clerks: [
+                                    { name: 'Vijay Patel', mobile: '9005678901', experience: '6 years', rating: '4.7/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Co-operation': {
+                        'Offices': {
+                            'Cooperation St': {
+                                address: 'No. 1, Cooperation St, Bengaluru',
+                                contact: '0806789012',
+                                clerks: [
+                                    { name: 'Pooja Singh', mobile: '9006789012', experience: '5 years', rating: '4.3/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Personnel and Administrative Reforms (DPAR)': {
+                        'Offices': {
+                            'DPAR St': {
+                                address: 'No. 1, DPAR St, Bengaluru',
+                                contact: '0807890123',
+                                clerks: [
+                                    { name: 'Ramesh Gupta', mobile: '9007890123', experience: '7 years', rating: '4.6/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Administrative Reforms': {
+                        'Offices': {
+                            'Admin Reforms St': {
+                                address: 'No. 1, Admin Reforms St, Bengaluru',
+                                contact: '0808901234',
+                                clerks: [
+                                    { name: 'Suman Rao', mobile: '9008901234', experience: '8 years', rating: '4.8/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'e-Governance': {
+                        'Offices': {
+                            'e-Gov St': {
+                                address: 'No. 1, e-Gov St, Bengaluru',
+                                contact: '0809012345',
+                                clerks: [
+                                    { name: 'Neha Verma', mobile: '9009012345', experience: '9 years', rating: '4.9/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Janaspandana': {
+                        'Offices': {
+                            'Jana St': {
+                                address: 'No. 1, Jana St, Bengaluru',
+                                contact: '0809123456',
+                                clerks: [
+                                    { name: 'Arun Kumar', mobile: '9009123456', experience: '10 years', rating: '5.0/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Higher Education': {
+                        'Offices': {
+                            'Higher Edu St': {
+                                address: 'No. 1, Higher Edu St, Bengaluru',
+                                contact: '0809234567',
+                                clerks: [
+                                    { name: 'Kavita Menon', mobile: '9009234567', experience: '11 years', rating: '4.7/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Primary and Secondary Education': {
+                        'Offices': {
+                            'Primary Edu St': {
+                                address: 'No. 1, Primary Edu St, Bengaluru',
+                                contact: '0809345678',
+                                clerks: [
+                                    { name: 'Ajay Mehta', mobile: '9009345678', experience: '12 years', rating: '4.8/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Energy': {
+                        'Offices': {
+                            'Energy St': {
+                                address: 'No. 1, Energy St, Bengaluru',
+                                contact: '0809456789',
+                                clerks: [
+                                    { name: 'Sunita Rao', mobile: '9009456789', experience: '13 years', rating: '4.9/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Finance': {
+                        'Offices': {
+                            'Finance St': {
+                                address: 'No. 1, Finance St, Bengaluru',
+                                contact: '0809567890',
+                                clerks: [
+                                    { name: 'Anil Kapoor', mobile: '9009567890', experience: '14 years', rating: '5.0/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Food and Civil Supplies': {
+                        'Offices': {
+                            'Food St': {
+                                address: 'No. 1, Food St, Bengaluru',
+                                contact: '0809678901',
+                                clerks: [
+                                    { name: 'Jyoti Sharma', mobile: '9009678901', experience: '15 years', rating: '4.7/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Forest, Ecology and Environment': {
+                        'Offices': {
+                            'Forest St': {
+                                address: 'No. 1, Forest St, Bengaluru',
+                                contact: '0809789012',
+                                clerks: [
+                                    { name: 'Rahul Sen', mobile: '9009789012', experience: '16 years', rating: '4.8/5' }
+                                ]
+                            }
+                        }
+                    },
+                    // Add other departments similarly for Bengaluru...
                 }
             },
-            'Pune': {
+            'Mysore': {
                 'Departments': {
-                    'IT': {
+                    'Agriculture': {
                         'Offices': {
-                            'Office 1': {
-                                address: '789 Tech Ave, Pune',
-                                contact: '7654321098',
+                            'Agriculture St': {
+                                address: 'No. 1, Agriculture St, Mysore',
+                                contact: '0821234567',
                                 clerks: [
-                                    { name: 'Alice Wonderland', mobile: '4567890123', experience: '6 years', rating: '4.7/5' },
-                                    { name: 'Bob Builder', mobile: '5678901234', experience: '5 years', rating: '4.3/5' }
+                                    { name: 'Suresh Babu', mobile: '9011234567', experience: '5 years', rating: '4.5/5' }
+                                ]
+                            },
+                            'Agriculture Rd': {
+                                address: 'No. 2, Agriculture Rd, Mysore',
+                                contact: '0822345678',
+                                clerks: [
+                                    { name: 'Radha Nair', mobile: '9012345678', experience: '3 years', rating: '4.0/5' }
                                 ]
                             }
                         }
-                    }
+                    },
+                    'Animal Husbandary and Fisheries': {
+                        'Offices': {
+                            'Fisheries St': {
+                                address: 'No. 1, Fisheries St, Mysore',
+                                contact: '0823456789',
+                                clerks: [
+                                    { name: 'Mukesh Verma', mobile: '9013456789', experience: '4 years', rating: '4.2/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Backward Class Welfare': {
+                        'Offices': {
+                            'Welfare St': {
+                                address: 'No. 1, Welfare St, Mysore',
+                                contact: '0824567890',
+                                clerks: [
+                                    { name: 'Meena Gupta', mobile: '9014567890', experience: '2 years', rating: '3.8/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Commerce and Industries': {
+                        'Offices': {
+                            'Commerce St': {
+                                address: 'No. 1, Commerce St, Mysore',
+                                contact: '0825678901',
+                                clerks: [
+                                    { name: 'Nitin Rao', mobile: '9015678901', experience: '6 years', rating: '4.7/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Co-operation': {
+                        'Offices': {
+                            'Cooperation St': {
+                                address: 'No. 1, Cooperation St, Mysore',
+                                contact: '0826789012',
+                                clerks: [
+                                    { name: 'Priya Singh', mobile: '9016789012', experience: '5 years', rating: '4.3/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Personnel and Administrative Reforms (DPAR)': {
+                        'Offices': {
+                            'DPAR St': {
+                                address: 'No. 1, DPAR St, Mysore',
+                                contact: '0827890123',
+                                clerks: [
+                                    { name: 'Ravi Patel', mobile: '9017890123', experience: '7 years', rating: '4.6/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Administrative Reforms': {
+                        'Offices': {
+                            'Admin Reforms St': {
+                                address: 'No. 1, Admin Reforms St, Mysore',
+                                contact: '0828901234',
+                                clerks: [
+                                    { name: 'Sakshi Rao', mobile: '9018901234', experience: '8 years', rating: '4.8/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'e-Governance': {
+                        'Offices': {
+                            'e-Gov St': {
+                                address: 'No. 1, e-Gov St, Mysore',
+                                contact: '0829012345',
+                                clerks: [
+                                    { name: 'Naveen Gupta', mobile: '9019012345', experience: '9 years', rating: '4.9/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Janaspandana': {
+                        'Offices': {
+                            'Jana St': {
+                                address: 'No. 1, Jana St, Mysore',
+                                contact: '0829123456',
+                                clerks: [
+                                    { name: 'Arjun Kumar', mobile: '9019123456', experience: '10 years', rating: '5.0/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Higher Education': {
+                        'Offices': {
+                            'Higher Edu St': {
+                                address: 'No. 1, Higher Edu St, Mysore',
+                                contact: '0829234567',
+                                clerks: [
+                                    { name: 'Kalpana Menon', mobile: '9019234567', experience: '11 years', rating: '4.7/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Primary and Secondary Education': {
+                        'Offices': {
+                            'Primary Edu St': {
+                                address: 'No. 1, Primary Edu St, Mysore',
+                                contact: '0829345678',
+                                clerks: [
+                                    { name: 'Amit Mehta', mobile: '9019345678', experience: '12 years', rating: '4.8/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Energy': {
+                        'Offices': {
+                            'Energy St': {
+                                address: 'No. 1, Energy St, Mysore',
+                                contact: '0829456789',
+                                clerks: [
+                                    { name: 'Sunil Rao', mobile: '9019456789', experience: '13 years', rating: '4.9/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Finance': {
+                        'Offices': {
+                            'Finance St': {
+                                address: 'No. 1, Finance St, Mysore',
+                                contact: '0829567890',
+                                clerks: [
+                                    { name: 'Anil Kumar', mobile: '9019567890', experience: '14 years', rating: '5.0/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Food and Civil Supplies': {
+                        'Offices': {
+                            'Food St': {
+                                address: 'No. 1, Food St, Mysore',
+                                contact: '0829678901',
+                                clerks: [
+                                    { name: 'Jaya Sharma', mobile: '9019678901', experience: '15 years', rating: '4.7/5' }
+                                ]
+                            }
+                        }
+                    },
+                    'Forest, Ecology and Environment': {
+                        'Offices': {
+                            'Forest St': {
+                                address: 'No. 1, Forest St, Mysore',
+                                contact: '0829789012',
+                                clerks: [
+                                    { name: 'Rahul Nair', mobile: '9019789012', experience: '16 years', rating: '4.8/5' }
+                                ]
+                            }
+                        }
+                    },
+                    // Add other departments similarly for Mysore...
                 }
             }
         }
     }
 };
+
+
 
 countrySelect.addEventListener('change', function() {
     stateSelect.innerHTML = '<option value="">Select State</option>';
@@ -209,6 +525,11 @@ officeSelect.addEventListener('change', function() {
     clerkSelect.innerHTML = '<option value="">Select Clerk</option>';
     clerkSelect.disabled = !this.value;
 
+    const selectedOffice = this.options[this.selectedIndex].value;
+    const officeAddress = data[countrySelect.value][stateSelect.value][citySelect.value]['Departments'][departmentSelect.value]['Offices'][selectedOffice]['address'];
+    
+    document.getElementById('officeAddress').textContent = officeAddress;
+
     if (this.value) {
         const clerks = data[countrySelect.value][stateSelect.value][citySelect.value]['Departments'][departmentSelect.value]['Offices'][this.value]['clerks'];
         clerks.forEach(clerk => {
@@ -221,6 +542,7 @@ officeSelect.addEventListener('change', function() {
         });
     }
 });
+
 
 // Back button logic for clerk form
 const clerkFormBackButton = document.getElementById('clerkFormBackButton');
