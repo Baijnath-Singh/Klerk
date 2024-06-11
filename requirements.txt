@@ -8,3 +8,4 @@ pydantic
 pymongo
 requests  # This is used for making HTTP requests to the OpenAI and Azure endpoints
 gunicorn # For deploying the Flask app with a WSGI server
+azure-ai-formrecognizer

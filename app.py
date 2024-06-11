@@ -1,10 +1,10 @@
 import os
 from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
-import base64
 import requests
 from pymongo import MongoClient
-from datetime import datetime, timezone
+from azure.core.credentials import AzureKeyCredential
+from azure.ai.formrecognizer import DocumentAnalysisClient
 import openai
 
 load_dotenv()
@@ -26,6 +26,14 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 openai_api_endpoint = os.getenv("OPENAI_API_ENDPOINT")
 openai_deployment = os.getenv("OPENAI_LLM_4_O")
 openai_embedding = os.getenv("OPENAI_LLM_EMBEDDING")
+
+# Initialize Azure Form Recognizer Client
+form_recognizer_endpoint = os.getenv("DOCUMENT_ANALYSIS_ENDPOINT")
+form_recognizer_key = os.getenv("DOCUMENT_ANALYSIS_KEY")
+document_analysis_client = DocumentAnalysisClient(
+    endpoint=form_recognizer_endpoint,
+    credential=AzureKeyCredential(form_recognizer_key)
+)
 
 def generate_embeddings(text, engine):
     """
@@ -75,6 +83,25 @@ def vector_search(collection_name, query_embedding, num_results=1):
     results = collection.aggregate(pipeline)
     return results
 
+def extract_text_from_file(file_path):
+    """
+    Extract text from a file using Azure Form Recognizer's Read model.
+
+    Args:
+        file_path (str): The path to the file to be analyzed.
+
+    Returns:
+        str: The extracted text from the file.
+    """
+    with open(file_path, "rb") as file:
+        poller = document_analysis_client.begin_analyze_document("prebuilt-read", file)
+        result = poller.result()
+
+    # Extract text content from lines
+    extracted_text = " ".join([line.content for page in result.pages for line in page.lines])
+    return extracted_text
+
+
 
 @app.route('/')
 def index():
@@ -82,121 +109,108 @@ def index():
 
 @app.route('/translate', methods=['POST'])
 def translate():
-   
-    sImageData = None
+    sLongImageFn = None
 
-    # Retrieve input image file and encode the image to base64
+    # Retrieve input image file
     file = request.files.get('file')
     if file:
         sLongImageFn = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(sLongImageFn)
         print(f'File uploaded and saved at: {sLongImageFn}')
-        sImageData = base64.b64encode(open(sLongImageFn, 'rb').read()).decode('ascii')
+        
+    try:
+        # Extract text from file using Document Intelligence Read model
+        extracted_text = extract_text_from_file(sLongImageFn) if sLongImageFn else ""
 
-    # Retrieve target language
-    target_language = request.form.get('target_language')
+        # Retrieve target language
+        target_language = request.form.get('target_language', 'english')
     
-    # Retrieve additional query
-    query = request.form.get('query')
+        # Retrieve additional query
+        query = request.form.get('query', '')
 
-    print(f'Target language: {target_language}')
-    print(f'User query: {query}')
+        print(f'Target language: {target_language}')
+        print(f'User query: {query}')
+        print(f'Extracted text from file: {extracted_text}')
     
-    # Step 1: Create embeddings on input prompt
-    query_embedding = generate_embeddings(query, engine=openai_embedding)  # Example embedding model 
-    #print("query_embedding: ", query_embedding)
+        # Combine query and extracted text for embedding generation
+        combined_query = query if query else extracted_text
+        print("combined_query:", combined_query)
 
-    # Step 2: Perform vector search in Cosmos DB
-    response = vector_search("KarnatakaLegalBook", query_embedding, 1)  # Assuming your collection supports vector search
-    print("vector_search response", response)
+        # Step 1: Create embeddings on input prompt
+        query_embedding = generate_embeddings(combined_query, engine=openai_embedding)
 
-    # Step 3: Augment the input prompt with retrieved text
-    results = list(response)
-    if results:
-        for doc in response:
-            print("Question", doc['document']['question'])
-            print("Answer", doc['document']['answer'])
-            query += f"\n\n{doc['document']['question']}\n{doc['document']['answer']}"
-    
-    print("augmented query:", query)
-
-    sEndpoint = openai_api_endpoint
-    sKey = openai_api_key
-    sDeployment = openai_deployment
-
-    # Initialize messages with the system prompt
-    dData = {
-        "messages": [
-            {
-                "role": "system",
-                "content": """
-                Your name is Klerk
-                You are an expert Multilingual Clerk with vast knowledge of government rules, policies, regulations, scheme, offers etc.
-                You can read and comprehend content in multiple languages and respond accurately to queries in a language {target_language}. 
-                You can interpret input files in various formats and provide precise answers in {target_language} based on the content of these files.
-                You can also answer to any query if asked in {target_language}
-                """
-            }
-        ],
-        "max_tokens": 100,
-        "stream": False,
-    }
-
-    
-    # Construct the content for the user message
-    user_content = None
-    if sImageData:
-        user_content = f"Describe the content on the image in {target_language} language and provide detailed information."
+        # Step 2: Perform vector search in Cosmos DB only if there is a query
         if query:
-            user_content += f" and answer the following question in {target_language}: {query}"
+            response = vector_search("KarnatakaLegalBook", query_embedding, 1)
+            print("vector_search response", response)
 
-    # Add the image message if an image was uploaded
-    if sImageData:
-        image_message = {
-            "role": "user",
-            "content": [
+            # Step 3: Augment the input prompt with retrieved text
+            #results = list(response)
+            #if results:
+            for doc in response:
+                print("Question", doc['document']['question'])
+                print("Answer", doc['document']['answer'])
+                combined_query += f"\n\n{doc['document']['question']}\n{doc['document']['answer']}"
+        
+        print("augmented query:", combined_query)
+
+        sEndpoint = openai_api_endpoint
+        sKey = openai_api_key
+        sDeployment = openai_deployment
+
+        # Initialize messages with the system prompt
+        dData = {
+            "messages": [
                 {
-                    "type": "text",
-                    "text": f"{user_content}"
-                },
-                {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": f"data:image/jpeg;base64,{sImageData}",
-                    }
+                    "role": "system",
+                    "content": f"""
+                    Your name is Klerk.
+                    You are an expert Multilingual Clerk with vast knowledge of government rules, policies, regulations, schemes, offers, etc.
+                    You can read and comprehend content in multiple languages and respond accurately to queries in {target_language}. 
+                    You can interpret input files in various formats and provide detail answers in {target_language} based on the content of these files.
+                    You can also answer any query if asked in {target_language}.
+                    You can make sure to capture:
+                    1.Any section numbers, clauses, obligations, conditions, Act
+                    2.Dates including effective dates, expiration dates, titles, and any other relevant time frames.
+                    """
                 }
-            ]
+            ],
+            "max_tokens": 1000,
+            "stream": False,
         }
-        dData["messages"].append(image_message)
-    
-    # Check if a query was provided by the user and append it to the messages
-    if not sImageData and query:
-        if query:
-            user_content = f"Answer the following question in {target_language}: {query}"
 
+        # Construct the content for the user message
+        user_content = f"Answer the following question in {target_language}: {query}\n\nContent extracted from the input file:\n{extracted_text}"
+
+        # Add the user message
         dData["messages"].append({
             "role": "user",
             "content": f"{user_content}"
         })
 
-    
-    # Make the API request
-    response = requests.post(
-        f'{sEndpoint}openai/deployments/{sDeployment}/chat/completions?api-version=2024-02-01',
-        headers={'api-key': sKey, 'Content-Type': 'application/json'},
-        json=dData
-    )
+        # Make the API request
+        response = requests.post(
+            f'{sEndpoint}openai/deployments/{sDeployment}/chat/completions?api-version=2024-02-01',
+            headers={'api-key': sKey, 'Content-Type': 'application/json'},
+            json=dData
+        )
 
-    response_json = response.json()
-    print(response_json)
+        response_json = response.json()
+        print(response_json)
 
-    # Extract the response from the LLM output
-    response_text = response_json.get('choices', [{}])[0].get('message', {}).get('content', 'An error occurred.')
+        # Extract the response from the LLM output
+        response_text = response_json.get('choices', [{}])[0].get('message', {}).get('content', 'An error occurred.')
 
-    # Return the response as JSON
-    return jsonify({'response_text': response_text})
+        # Return the response as JSON
+        return jsonify({'response_text': response_text})
+    finally:
+        # Delete the file after processing
+        if sLongImageFn and os.path.exists(sLongImageFn):
+            os.remove(sLongImageFn)
+            print(f'File {sLongImageFn} has been deleted.')
 
 #if __name__ == '__main__':
     #app.run(debug=True)
+
 
 
