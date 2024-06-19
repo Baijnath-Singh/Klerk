@@ -85,3 +85,19 @@ label {
         font-size: 1.5rem;
     }
 }
+
+/* Adjusted custom prompt button with reduced transparency */
+#customPromptButton {
+    background-color: rgba(0, 86, 179, 0.2); /* Reduced transparency (0.2 for 80% transparency) */
+    border: 1px solid #0056b3; /* Solid border with your desired color */
+    color: #0056b3; /* Text color */
+    padding: 8px 16px; /* Padding for button */
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+#customPromptButton:hover {
+    background-color: rgba(0, 86, 179, 0.4); /* Increased transparency on hover (0.4 for 60% transparency) */
+    border-color: #003366; /* Adjusted border color on hover */
+    color: #003366; /* Text color on hover */
+}

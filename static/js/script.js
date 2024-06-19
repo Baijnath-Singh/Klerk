@@ -48,6 +48,12 @@ acceptTermsButton.addEventListener('click', function() {
     }
 });
 
+// Event listener for the custom prompt button
+document.getElementById('customPromptButton').addEventListener('click', function() {
+    const promptText = "My name is Baijnath Singh and I am participating in the Microsoft Developer AI Learning Hackathon.";
+    document.getElementById('userQuery').value = promptText;
+});
+
 // Find Clerk button logic
 const findClerkButton = document.getElementById('findClerkButton');
 const clerkInfoContainer = document.getElementById('clerkInfoContainer');
