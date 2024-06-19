@@ -19,7 +19,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Initialize MongoDB client
 client = MongoClient(os.getenv('DB_CONNECTION_STRING'))
 db = client['karnatakaLegalBook']
-collection = db['KarnatakaLegalBook']
+collection = db['document_registration']
 
 # Initialize OpenAI API
 openai_api_key = os.getenv("OPENAI_API_KEY")
@@ -141,7 +141,7 @@ def translate():
 
         # Step 2: Perform vector search in Cosmos DB only if there is a query
         if query:
-            response = vector_search("KarnatakaLegalBook", query_embedding, 1)
+            response = vector_search("document_registration", query_embedding, 1)
             print("vector_search response", response)
 
             # Step 3: Augment the input prompt with retrieved text
