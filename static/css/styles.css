@@ -101,3 +101,15 @@ label {
     border-color: #003366; /* Adjusted border color on hover */
     color: #003366; /* Text color on hover */
 }
+
+#loadingMessage {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+}

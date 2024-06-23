@@ -1,5 +1,6 @@
 document.getElementById('translatorForm').addEventListener('submit', function(event) {
     event.preventDefault();
+    showLoadingMessage();
     const formData = new FormData(this);
     fetch('/translate', {
         method: 'POST',
@@ -16,6 +17,9 @@ document.getElementById('translatorForm').addEventListener('submit', function(ev
     .catch(error => {
         console.error('Error:', error);
         displayOutput('An error occurred.');
+    })
+    .finally(() => {
+        hideLoadingMessage();
     });
 });
 
@@ -75,6 +79,15 @@ function loadCountryOptions() {
         countrySelect.appendChild(option);
     });
 }
+
+function showLoadingMessage() {
+    document.getElementById('loadingMessage').style.display = 'block';
+}
+
+function hideLoadingMessage() {
+    document.getElementById('loadingMessage').style.display = 'none';
+}
+
 
 // Logic to populate state, city, department, office, and clerk options dynamically
 const countrySelect = document.getElementById('countrySelect');
