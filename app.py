@@ -1,4 +1,5 @@
 import os
+import time
 from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
 import requests
@@ -101,6 +102,17 @@ def extract_text_from_file(file_path):
     extracted_text = " ".join([line.content for page in result.pages for line in page.lines])
     return extracted_text
 
+def retry_request(url, headers, json_data, max_retries=12, delay=5):
+    attempts = 0
+    while attempts < max_retries:
+        response = requests.post(url, headers=headers, json=json_data)
+        if response.status_code == 429:
+            attempts += 1
+            print(f"Rate limit exceeded. Retrying in {delay} seconds... (Attempt {attempts}/{max_retries})")
+            time.sleep(delay)
+        else:
+            return response
+    response.raise_for_status()
 
 
 @app.route('/')
@@ -189,10 +201,10 @@ def translate():
         })
 
         # Make the API request
-        response = requests.post(
+        response = retry_request(
             f'{sEndpoint}openai/deployments/{sDeployment}/chat/completions?api-version=2024-02-01',
             headers={'api-key': sKey, 'Content-Type': 'application/json'},
-            json=dData
+            json_data=dData
         )
 
         response_json = response.json()
