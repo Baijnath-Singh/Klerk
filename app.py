@@ -6,6 +6,7 @@ import requests
 from pymongo import MongoClient
 from azure.core.credentials import AzureKeyCredential
 from azure.ai.formrecognizer import DocumentAnalysisClient
+import azure.cognitiveservices.speech as speech_sdk
 import openai
 
 load_dotenv()
@@ -36,6 +37,160 @@ document_analysis_client = DocumentAnalysisClient(
     credential=AzureKeyCredential(form_recognizer_key)
 )
 
+# Initialize Azure Speech Services
+speech_api_key = os.getenv('SPEECH_KEY')
+speech_api_region = os.getenv('SPEECH_REGION')
+speech_config = speech_sdk.SpeechConfig(speech_api_key, speech_api_region)
+
+"""
+languageToSpeechCode will return speech code and speech synthesis voice name based on the language
+"""
+def languageToSpeechCode(language):
+    speechCode = 'en-US'
+    speechSynthesisVoiceName = "en-GB-RyanNeural"
+    if language == 'hi':
+        speechCode = 'hi-IN'
+        speechSynthesisVoiceName = "hi-IN-SwaraNeural"
+    elif language == 'kn':
+        speechCode = 'kn-IN'
+        speechSynthesisVoiceName = "kn-IN-VinayNeural"
+    elif language == 'ta':
+        speechCode = 'ta-IN'
+        speechSynthesisVoiceName = "ta-IN-ValluvarNeural"
+    elif language == 'te':
+        speechCode = 'te-IN'
+        speechSynthesisVoiceName = "te-IN-MohanaNeural"
+    elif language == 'mr':
+        speechCode = 'mr-IN'
+        speechSynthesisVoiceName = "mr-IN-AarohiNeural"
+    elif language == 'gu':
+        speechCode = 'gu-IN'
+        speechSynthesisVoiceName = "gu-IN-DhvaniNeural"
+    elif language == 'ml':
+        speechCode = 'ml-IN'
+        speechSynthesisVoiceName = "ml-IN-AadhyaNeural"
+    elif language == 'or':
+        speechCode = 'or-IN'
+        speechSynthesisVoiceName = "or-IN-LekhaNeural"
+    elif language == 'ur':
+        speechCode = 'ur-PK'
+        speechSynthesisVoiceName = "ur-PK-AsadNeural"
+    elif language == 'as':
+        speechCode = 'as-IN'
+        speechSynthesisVoiceName = "as-IN-AhirbhudnyaNeural"
+    elif language == 'bn':
+        speechCode = 'bn-IN'
+        speechSynthesisVoiceName = "bn-IN-ArunNeural"
+    elif language == 'pa':
+        speechCode = 'pa-IN'
+        speechSynthesisVoiceName = "pa-IN-AkalNeural"
+    elif language == 'zh':
+        speechCode = 'zh-CN'
+        speechSynthesisVoiceName = "zh-CN-XiaoxiaoNeural"
+    elif language == 'es':
+        speechCode = 'es-ES'
+        speechSynthesisVoiceName = "es-ES-ElviraNeural"
+    elif language == 'fr':
+        speechCode = 'fr-FR'
+        speechSynthesisVoiceName = "fr-FR-DeniseNeural"
+    elif language == 'ar':
+        speechCode = 'ar-SA'
+        speechSynthesisVoiceName = "ar-SA-ZubaydaNeural"
+    elif language == 'pt':  
+        speechCode = 'pt-BR'
+        speechSynthesisVoiceName = "pt-BR-FranciscaNeural"
+    elif language == 'ru':
+        speechCode = 'ru-RU'
+        speechSynthesisVoiceName = "ru-RU-SvetlanaNeural"
+    elif language == 'de':
+        speechCode = 'de-DE'
+        speechSynthesisVoiceName = "de-DE-KatjaNeural"
+    elif language == 'ja':
+        speechCode = 'ja-JP'
+        speechSynthesisVoiceName = "ja-JP-AyumiNeural"
+    elif language == 'ko':
+        speechCode = 'ko-KR'
+        speechSynthesisVoiceName = "ko-KR-SunHiNeural"
+    elif language == 'vi':
+        speechCode = 'vi-VN'
+        speechSynthesisVoiceName = "vi-VN-HoaiMyNeural"
+    elif language == 'it':
+        speechCode = 'it-IT'
+        speechSynthesisVoiceName = "it-IT-ElsaNeural"
+    elif language == 'tr':
+        speechCode = 'tr-TR'
+        speechSynthesisVoiceName = "tr-TR-EmelNeural"
+    elif language == 'ms':
+        speechCode = 'ms-MY'
+        speechSynthesisVoiceName = "ms-MY-YasminNeural"
+    elif language == 'fa':
+        speechCode = 'fa-IR'
+        speechSynthesisVoiceName = "fa-IR-ParisaNeural"
+    elif language == 'th':
+        speechCode = 'th-TH'
+        speechSynthesisVoiceName = "th-TH-AcharaNeural"
+    elif language == 'nl':
+        speechCode = 'nl-NL'
+        speechSynthesisVoiceName = "nl-NL-ColetteNeural"
+    elif language == 'el':  
+        speechCode = 'el-GR'
+        speechSynthesisVoiceName = "el-GR-AthinaNeural"
+    elif language == 'he':
+        speechCode = 'he-IL'
+        speechSynthesisVoiceName = "he-IL-HilaNeural"
+    elif language == 'sv':
+        speechCode = 'sv-SE'
+        speechSynthesisVoiceName = "sv-SE-HilleviNeural"
+    elif language == 'da':
+        speechCode = 'da-DK'
+        speechSynthesisVoiceName = "da-DK-HelleNeural"
+    # Return both speechCode and speechSynthesisVoiceName
+    return speechCode, speechSynthesisVoiceName
+
+def generate_text_to_speech(response_text, language='en-US'):
+    """
+    Generate text-to-speech audio from a given text using Azure Speech Services.
+    """
+    # Set the speech synthesis language and voice
+    speechCode, speechSynthesisVoiceName = languageToSpeechCode(language)
+    speech_config.speech_synthesis_voice_name = speechSynthesisVoiceName
+    speech_config.speech_synthesis_language = speechCode
+    speech_synthesizer = speech_sdk.SpeechSynthesizer(speech_config)
+
+    speak = speech_synthesizer.speak_text_async(response_text).get()
+    print(f"Speech synthesis status: {speak.reason}")
+    if speak.reason != speech_sdk.ResultReason.SynthesizingAudioCompleted:
+        print(speak.reason)
+    
+    # Print the response
+    print(response_text)
+
+def generate_speech_to_text(audio_file_path, language='en-US'):
+    """
+    Generate speech-to-text transcription from an audio file using Azure Speech Services.
+    """
+    command = ''
+
+    audio_config = speech_sdk.AudioConfig(use_default_microphone=True)
+    speech_recognizer = speech_sdk.SpeechRecognizer(speech_config, audio_config)
+    print('Speak now...')
+
+    # Process speech input
+    speech = speech_recognizer.recognize_once_async().get()
+    if speech.reason == speech_sdk.ResultReason.RecognizedSpeech:
+        command = speech.text
+        print(command)
+    else:
+        print(speech.reason)
+        if speech.reason == speech_sdk.ResultReason.Canceled:
+            cancellation = speech.cancellation_details
+            print(cancellation.reason)
+            print(cancellation.error_details)
+
+    # Return the command
+    return command
+
+    
 def generate_embeddings(text, engine):
     """
     Generate embeddings for a given text using the specified Azure OpenAI embedding model.
@@ -212,6 +367,9 @@ def translate():
 
         # Extract the response from the LLM output
         response_text = response_json.get('choices', [{}])[0].get('message', {}).get('content', 'An error occurred.')
+
+        # Generate text-to-speech audio from the response
+        generate_text_to_speech(response_text, language=target_language)
 
         # Return the response as JSON
         return jsonify({'response_text': response_text})
